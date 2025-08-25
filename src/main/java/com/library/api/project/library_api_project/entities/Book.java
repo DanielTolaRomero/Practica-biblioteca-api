@@ -2,8 +2,7 @@ package com.library.api.project.library_api_project.entities;
 
 
 
-import java.util.Date;
-
+import com.fasterxml.jackson.annotation.JsonBackReference;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -21,28 +20,20 @@ public class Book {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
-    @NotBlank(message = "El titulo es obligatorio")
-    @Column(nullable = false)
+    @Column(unique = true, nullable = false)
     private String title;
 
-    private Date publishedYear;
+    private Integer publishedYear;
     
+    @Column(unique = true, nullable = false)
+    private String isbn;
+
     @ManyToOne
     @JoinColumn(name = "author_id", nullable = false)
     private Author author;
 
-    @Column(unique = true, nullable = false)
-    private String isbn;
 
     public Book() {
-    }
-
-    public Book(@NotBlank(message = "El titulo es obligatorio") String title, Date publishedYear, Author author,
-            String isbn) {
-        this.title = title;
-        this.publishedYear = publishedYear;
-        this.author = author;
-        this.isbn = isbn;
     }
 
     @Override
@@ -83,11 +74,11 @@ public class Book {
         this.title = title;
     }
 
-    public Date getPublishedYear() {
+    public Integer getPublishedYear() {
         return publishedYear;
     }
 
-    public void setPublishedYear(Date publishedYear) {
+    public void setPublishedYear(Integer publishedYear) {
         this.publishedYear = publishedYear;
     }
 
@@ -105,11 +96,7 @@ public class Book {
 
     public void setIsbn(String isbn) {
         this.isbn = isbn;
-    }
-
-    
-
-    
+    } 
     
 
 }

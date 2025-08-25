@@ -1,8 +1,10 @@
 package com.library.api.project.library_api_project.entities;
 
 
-import java.util.Date;
+import java.time.LocalDate;
 import java.util.List;
+
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
@@ -12,6 +14,9 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.NotNull;
+
 
 
 @Entity
@@ -21,10 +26,13 @@ public class Author {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
-    @NotBlank(message = "El nombre es obligatorio")
+    @NotNull(message = "El nombre del autor no puede ser nulo")
+    @NotEmpty(message = "El nombre del autor no pueder se vacio")
+    @NotBlank(message = "El nombre del autor es obligatorio")
     @Column(unique = true, nullable = false)
     private String name;
-    private Date birthDate;
+    
+    private LocalDate birthDate;
 
     @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, mappedBy = "author")
     private List<Book> books;
@@ -32,12 +40,17 @@ public class Author {
     public Author() {
     }
 
-    public Author(@NotBlank(message = "El nombre es obligatorio") String name, Date birthDate) {
+    public Author(@NotBlank(message = "El nombre es obligatorio") String name) {
+        this.name = name;
+    }
+
+
+    public Author(@NotBlank(message = "El nombre es obligatorio") String name, LocalDate birthDate) {
         this.name = name;
         this.birthDate = birthDate;
     }
 
-    public Author(@NotBlank(message = "El nombre es obligatorio") String name, Date birthDate, List<Book> books) {
+    public Author(@NotBlank(message = "El nombre es obligatorio") String name, LocalDate birthDate, List<Book> books) {
         this.name = name;
         this.birthDate = birthDate;
         this.books = books;
@@ -59,11 +72,11 @@ public class Author {
         this.name = name;
     }
 
-    public Date getBirthDate() {
+    public LocalDate getBirthDate() {
         return birthDate;
     }
 
-    public void setBirthDate(Date birthDate) {
+    public void setBirthDate(LocalDate birthDate) {
         this.birthDate = birthDate;
     }
 
@@ -97,6 +110,15 @@ public class Author {
         return true;
     }
 
-    
+    public void saveBook(Book book){
+        books.add(book);
+        book.setAuthor(this);
+    }
+
+    public Book removeBook(Book book){
+        books.remove(book);
+        book.setAuthor(null);
+        return book;
+    }
 
 }
