@@ -1,24 +1,21 @@
 package com.library.api.project.library_api_project.entities.dto;
 
 import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
 
-public class BookUpdateDto {
+public class BookRequestBodyDto {
 
-    @NotNull(message = "El titulo no puede ser nulo")
-    @NotEmpty(message = "El titulo no puede estar vacio")
-    @NotBlank(message = "El titulo es obligatorio")
+
+    @NotBlank(message = "must not be blank")
     private String title;
     
+    @NotNull(message = "must not be null")
     private Integer publishedYear;
 
-    @NotNull(message = "el ISBN no puede ser nulo")
-    @NotEmpty(message = "el ISBN no puede estar vacio")
-    @NotBlank(message = "El ISBN es obligatorio")
+    @NotBlank(message = "must not be blank")
     private String isbn;
 
-    @NotNull(message = "El Author es obligatorio")
+    @NotNull(message = "must not be null")
     private Long authorId;
 
     public String getTitle() {

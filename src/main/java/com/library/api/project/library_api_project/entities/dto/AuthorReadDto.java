@@ -1,25 +1,16 @@
 package com.library.api.project.library_api_project.entities.dto;
 
 import java.time.LocalDate;
-import java.util.List;
 
-
-public class AuthorDto {
-
+public class AuthorReadDto {
     private Long id;
     private String name;
     private LocalDate birthdate;
-    private List<BookReadDto> book;
 
-    public AuthorDto(Long id, String name, LocalDate birthdate) {
+    public AuthorReadDto(Long id, String name) {
         this.id = id;
         this.name = name;
-        this.birthdate = birthdate;
     }
-
-    public AuthorDto() {
-    }
-
     public Long getId() {
         return id;
     }
@@ -39,14 +30,6 @@ public class AuthorDto {
         this.birthdate = birthdate;
     }
 
-    public List<BookReadDto> getBook() {
-        return book;
-    }
-
-    public void setBook(List<BookReadDto> book) {
-        this.book = book;
-    }
-    
     
 
 }

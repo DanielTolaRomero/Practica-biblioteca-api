@@ -4,24 +4,19 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import org.springframework.web.bind.annotation.RestController;
 
-import com.library.api.project.library_api_project.entities.Book;
-import com.library.api.project.library_api_project.entities.dto.BookCreateDto;
+import com.library.api.project.library_api_project.entities.dto.BookRequestBodyDto;
 import com.library.api.project.library_api_project.entities.dto.BookDto;
-import com.library.api.project.library_api_project.entities.dto.BookUpdateDto;
-import com.library.api.project.library_api_project.entities.dto.BookMapper;
 import com.library.api.project.library_api_project.services.BookService;
 
 import jakarta.validation.Valid;
 
-import java.lang.StackWalker.Option;
 import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.HttpStatusCode;
+
 import org.springframework.http.ResponseEntity;
-import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -38,7 +33,7 @@ public class BookController {
     private BookService service;
 
     @PostMapping
-    public ResponseEntity createBook(@Valid @RequestBody BookCreateDto book) {
+    public ResponseEntity createBook(@Valid @RequestBody BookRequestBodyDto book) {
         BookDto newBook = service.createBook(book);
         return ResponseEntity.status(HttpStatus.CREATED).body(newBook);
     }
@@ -66,7 +61,7 @@ public class BookController {
 
     
     @PutMapping("/{id}")
-    public ResponseEntity updateBook(@PathVariable long id, @Valid @RequestBody BookUpdateDto bookDto) {
+    public ResponseEntity updateBook(@PathVariable long id, @Valid @RequestBody BookRequestBodyDto bookDto) {
         BookDto book = service.UpdateBook(bookDto,id);
         return ResponseEntity.ok(book);
         

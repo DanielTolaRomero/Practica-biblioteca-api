@@ -10,8 +10,12 @@ public interface BookMapper {
 
     BookDto toDto(Book book);
 
-    Book toEntity(BookCreateDto dto);
+    Book toEntity(BookRequestBodyDto dto);
 
-    void updateEntityFromDto(BookUpdateDto dto, @MappingTarget Book book);
+    BookReadDto toReadDto(Book book);
+
+    Book toEntityFromReadDto(BookReadDto dto);
+
+    void updateEntityFromDto(BookRequestBodyDto dto, @MappingTarget Book book);
 
 }

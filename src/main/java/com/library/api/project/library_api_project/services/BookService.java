@@ -1,6 +1,5 @@
 package com.library.api.project.library_api_project.services;
 
-import java.lang.StackWalker.Option;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -11,10 +10,9 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 
 import com.library.api.project.library_api_project.entities.Author;
 import com.library.api.project.library_api_project.entities.Book;
-import com.library.api.project.library_api_project.entities.dto.BookCreateDto;
+import com.library.api.project.library_api_project.entities.dto.BookRequestBodyDto;
 import com.library.api.project.library_api_project.entities.dto.BookDto;
 import com.library.api.project.library_api_project.entities.dto.BookMapper;
-import com.library.api.project.library_api_project.entities.dto.BookUpdateDto;
 import com.library.api.project.library_api_project.repositories.AuthorRepository;
 import com.library.api.project.library_api_project.repositories.BookRepository;
 
@@ -32,7 +30,7 @@ public class BookService {
 
     // ------------------------------------------CREATE--------------------------------------------------
     
-    public BookDto createBook(BookCreateDto bookDto){
+    public BookDto createBook(BookRequestBodyDto bookDto){
             if (repo.findByIsbn(bookDto.getIsbn()).isPresent()) {
                 throw new IllegalArgumentException("El ISBN ya existe");
             }
@@ -69,7 +67,7 @@ public class BookService {
     }
 
     // ----------------------------------------------UPDATE---------------------------------------------
-    public BookDto UpdateBook(BookUpdateDto bookDto, long id) {
+    public BookDto UpdateBook(BookRequestBodyDto bookDto, long id) {
         Book book = repo.findById(id).orElseThrow(() -> new IllegalArgumentException("Book not found"));
         Author author = authorRepo.findById(bookDto.getAuthorId()).orElseThrow(()-> new IllegalArgumentException("El author no existe"));
 

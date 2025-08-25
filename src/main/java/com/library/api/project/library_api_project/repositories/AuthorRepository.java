@@ -7,7 +7,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
 import com.library.api.project.library_api_project.entities.Author;
-import com.library.api.project.library_api_project.entities.dto.AuthorDto;
+import com.library.api.project.library_api_project.entities.dto.AuthorReadDto;
 
 import java.util.List;
 import java.util.Optional;
@@ -18,6 +18,6 @@ public interface AuthorRepository extends JpaRepository<Author,Long> {
 
     public Optional<Author> findByName(String name);
     
-    @Query("select new com.library.api.project.library_api_project.entities.dto.AuthorDto(a.id, a.name) from Author a")
-    public List<AuthorDto> getNameAllAuthors();
+    @Query("select new com.library.api.project.library_api_project.entities.dto.AuthorReadDto(a.id, a.name) from Author a")
+    public List<AuthorReadDto> getNameAllAuthors();
 }

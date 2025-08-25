@@ -3,7 +3,7 @@ package com.library.api.project.library_api_project.pruebas;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.library.api.project.library_api_project.entities.Author;
 import com.library.api.project.library_api_project.entities.Book;
-import com.library.api.project.library_api_project.entities.dto.BookCreateDto;
+import com.library.api.project.library_api_project.entities.dto.BookRequestBodyDto;
 import com.library.api.project.library_api_project.repositories.AuthorRepository;
 import com.library.api.project.library_api_project.repositories.BookRepository;
 
@@ -54,7 +54,7 @@ class BookControllerTest {
         existingAuthorId = author.getId();
 
         // Crear un libro inicial antes de cada test
-        BookCreateDto dto = new BookCreateDto();
+        BookRequestBodyDto dto = new BookRequestBodyDto();
         dto.setTitle("Clean Code");
         dto.setPublishedYear(2008);
         dto.setIsbn("9780132350884");
@@ -79,7 +79,7 @@ class BookControllerTest {
     @Test
     @DisplayName("Debe crear un libro correctamente")
     void createBook_success() throws Exception {
-        BookCreateDto dto = new BookCreateDto();
+        BookRequestBodyDto dto = new BookRequestBodyDto();
         dto.setTitle("Refactoring");
         dto.setIsbn("9780201485677");
         dto.setPublishedYear(1999);
@@ -122,7 +122,7 @@ class BookControllerTest {
     @Test
     @DisplayName("Debe actualizar un libro existente")
     void updateBook_success() throws Exception {
-        BookCreateDto dto = new BookCreateDto();
+        BookRequestBodyDto dto = new BookRequestBodyDto();
         dto.setTitle("Clean Code (Updated)");
         dto.setPublishedYear(2009);
         dto.setIsbn("9780132350884");
@@ -139,7 +139,7 @@ class BookControllerTest {
     @Test
     @DisplayName("Debe devolver 404 al actualizar un libro inexistente")
     void updateBook_notFound() throws Exception {
-        BookCreateDto dto = new BookCreateDto();
+        BookRequestBodyDto dto = new BookRequestBodyDto();
         dto.setTitle("Non Existent");
         dto.setPublishedYear(2024);
         dto.setIsbn("0000000000");
@@ -170,7 +170,7 @@ class BookControllerTest {
     @Test
     @DisplayName("Debe validar campos inválidos al crear libro")
     void createBook_validationErrors() throws Exception {
-        BookCreateDto dto = new BookCreateDto();
+        BookRequestBodyDto dto = new BookRequestBodyDto();
         dto.setTitle("");
         dto.setPublishedYear(null);
         dto.setIsbn("");

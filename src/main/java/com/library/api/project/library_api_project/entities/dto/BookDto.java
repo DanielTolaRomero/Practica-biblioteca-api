@@ -1,9 +1,8 @@
 package com.library.api.project.library_api_project.entities.dto;
 
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.library.api.project.library_api_project.entities.Author;
-import com.library.api.project.library_api_project.entities.Book;
-
-
 
 public class BookDto {
 
@@ -13,7 +12,7 @@ public class BookDto {
 
     private Integer publishedYear;
 
-    private AuthorDto author;
+    private AuthorReadDto author;
 
     private String isbn;
 
@@ -54,12 +53,12 @@ public class BookDto {
         this.isbn = isbn;
     }
 
-    public AuthorDto getAuthor() {
+    public AuthorReadDto getAuthor() {
         return author;
     }
 
-    public void setAuthor(Author author) {
-        this.author = new AuthorDto(author);
+    public void setAuthor(AuthorReadDto author) {
+        this.author = author;
     }
 
     public Long getId() {

@@ -1,25 +1,29 @@
 package com.library.api.project.library_api_project.entities.dto;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
+public class BookReadDto {
 
-import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.NotEmpty;
-import jakarta.validation.constraints.NotNull;
+    private Long id;
 
-public class BookCreateDto {
-
-
-    @NotBlank(message = "must not be blank")
     private String title;
-    
-    @NotNull(message = "must not be null")
+
     private Integer publishedYear;
 
-    @NotBlank(message = "must not be blank")
     private String isbn;
 
-    @NotNull(message = "must not be null")
-    private Long authorId;
+    
+
+    public BookReadDto(Long id, String title) {
+        this.id = id;
+        this.title = title;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
 
     public String getTitle() {
         return title;
@@ -43,14 +47,6 @@ public class BookCreateDto {
 
     public void setIsbn(String isbn) {
         this.isbn = isbn;
-    }
-
-    public Long getAuthorId() {
-        return authorId;
-    }
-
-    public void setAuthorId(Long authorId) {
-        this.authorId = authorId;
     }
 
     
